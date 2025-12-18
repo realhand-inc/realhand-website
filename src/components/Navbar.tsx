@@ -1,54 +1,51 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#o6', label: 'O6' },
-    { href: '#l6', label: 'L6' },
-    { href: '#demo', label: 'Demo' },
-    { href: '#sponsorship', label: 'Sponsorship' },
-    { href: '#blog', label: 'Blog' },
-    { href: '#contact', label: 'Contact' },
+    { href: "#about", label: "About" },
+    { href: "#o6", label: "O6" },
+    { href: "#l6", label: "L6" },
+    { href: "#demo", label: "Demo" },
+    { href: "#sponsorship", label: "Sponsorship" },
+    { href: "#blog", label: "Blog" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/90 backdrop-blur-xl border-b border-border/50'
-          : 'bg-transparent'
+        isScrolled ? "bg-background/85 backdrop-blur-xl border-b border-border/60" : "bg-transparent"
       }`}
+      aria-label="Primary"
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          {/* Logo Placeholder - Replace src with your logo */}
-          <a href="#" className="flex items-center group">
-            <div className="h-12 w-auto flex items-center justify-center rounded-lg overflow-hidden">
-              {/* Replace this placeholder with your actual logo image */}
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center group-hover:shadow-[0_0_20px_hsl(217_100%_55%/0.4)] transition-shadow duration-300">
-                <span className="text-primary-foreground font-display font-bold text-xl">Logo</span>
-              </div>
-              {/* Uncomment and update the src when you have a logo:
-              <img 
-                src="/your-logo.png" 
-                alt="Company Logo" 
-                className="h-10 w-auto object-contain"
+          {/* Logo (configured via public/site-config.js) */}
+          <a href="#" className="flex items-center" aria-label="Home">
+            {siteConfig.brand.logoUrl ? (
+              <img
+                src={siteConfig.brand.logoUrl}
+                alt={siteConfig.brand.logoAlt || `${siteConfig.brand.companyName} logo`}
+                className="h-9 w-auto object-contain"
+                decoding="async"
               />
-              */}
-            </div>
+            ) : (
+              <div className="h-10 px-3 rounded-lg border border-border/70 bg-card/60 backdrop-blur flex items-center justify-center text-sm text-muted-foreground">
+                Set logoUrl in <span className="mx-1 font-medium text-foreground">site-config.js</span>
+              </div>
+            )}
           </a>
 
           {/* Desktop Navigation */}
@@ -64,7 +61,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="hidden lg:block">
             <Button variant="hero" size="default">
               Get Started
@@ -75,6 +71,8 @@ const Navbar = () => {
           <button
             className="lg:hidden text-foreground p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -83,7 +81,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border/50">
+        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border/60">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
