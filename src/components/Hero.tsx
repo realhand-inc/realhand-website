@@ -40,16 +40,21 @@ const Hero = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.05] mb-6 animate-fade-in-up animation-delay-200">
-            <span className="text-foreground">The Future of</span>
-            <br />
-            <span className="text-gradient">Intelligent Hardware</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 animate-fade-in-up animation-delay-200">
+            <span className="text-foreground">The Future of </span>
+            <span className="text-gradient">Dexterity</span>
+            <span className="text-foreground"> is now</span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up animation-delay-400">
-            We design and manufacture cutting-edge hardware powered by advanced AI, creating seamless
-            human-machine interactions for the next generation of technology.
+          {/* Subtitle / Description */}
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed animate-fade-in-up animation-delay-400">
+            Step into a world where robotics adapt to you. Our AI-powered hands bring human-like dexterity to your team and workflow, making every task smoother, safer, and more collaborative.
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed animate-fade-in-up animation-delay-500">
+            Dexterous manipulation is the next frontier in robotics. As automation and tele-operation expand globally, human-like hands will unlock massive productivity gains in manufacturing, logistics, and service robotics. Realhand™ is positioned to lead this transformation with proprietary technology and scalable integration pathways.
+          </p>
+          <p className="text-base md:text-lg font-semibold text-primary max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up animation-delay-600">
+            Let’s build the future of dexterity together.
           </p>
 
           {/* CTA Buttons */}
