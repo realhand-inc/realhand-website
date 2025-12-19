@@ -4,6 +4,21 @@ import { ArrowRight, Cpu, Zap } from "lucide-react";
 
 const Hero = () => {
   const heroImage = siteConfig.media.heroProductImageUrl;
+  const heroVideo = siteConfig.media.heroVideoUrl;
+
+  const getYoutubeEmbedUrl = (url: string) => {
+    try {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return match && match[2].length === 11
+        ? `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&loop=1&playlist=${match[2]}&controls=0`
+        : null;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const videoEmbedUrl = heroVideo ? getYoutubeEmbedUrl(heroVideo) : null;
 
   return (
     <header className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -71,7 +86,15 @@ const Hero = () => {
             <div className="aspect-video rounded-2xl bg-card/70 border border-border/60 flex items-center justify-center relative overflow-hidden shadow-soft">
               <div className="absolute inset-0 grid-pattern opacity-15" />
 
-              {heroImage ? (
+              {videoEmbedUrl ? (
+                <iframe
+                  src={videoEmbedUrl}
+                  title="Hero Video"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : heroImage ? (
                 <img
                   src={heroImage}
                   alt="AI-powered hardware product preview"
@@ -79,17 +102,18 @@ const Hero = () => {
                   loading="eager"
                   decoding="async"
                 />
-              ) : null}
-
-              <div className="relative z-10 flex flex-col items-center gap-4 text-center p-8">
-                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <Cpu className="w-10 h-10 text-primary" />
+              ) : (
+                <div className="relative z-10 flex flex-col items-center gap-4 text-center p-8">
+                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <Cpu className="w-10 h-10 text-primary" />
+                  </div>
+                  <span className="text-muted-foreground font-medium">
+                    Set <span className="font-semibold text-foreground">media.heroVideoUrl</span> or{" "}
+                    <span className="font-semibold text-foreground">media.heroProductImageUrl</span> in
+                    public/site-config.js
+                  </span>
                 </div>
-                <span className="text-muted-foreground font-medium">
-                  Set <span className="font-semibold text-foreground">media.heroProductImageUrl</span> in
-                  public/site-config.js
-                </span>
-              </div>
+              )}
             </div>
           </div>
         </section>

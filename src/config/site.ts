@@ -6,6 +6,7 @@ export type SiteConfig = {
   };
   media: {
     heroProductImageUrl: string;
+    heroVideoUrl: string;
     o6ImageUrl: string;
     l6ImageUrl: string;
     demoPosterImageUrl: string;
@@ -20,6 +21,7 @@ const defaultConfig: SiteConfig = {
   },
   media: {
     heroProductImageUrl: "",
+    heroVideoUrl: "",
     o6ImageUrl: "",
     l6ImageUrl: "",
     demoPosterImageUrl: "",
