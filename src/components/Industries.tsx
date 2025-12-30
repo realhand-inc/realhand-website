@@ -35,7 +35,7 @@ const industries = [
 
 const Industries = () => {
   return (
-    <section id="industries" className="py-32 relative overflow-hidden scroll-mt-24">
+    <section id="industries" className="py-32 relative overflow-hidden scroll-mt-24 snap-start min-h-screen flex items-center">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-primary/10 rounded-full blur-[140px]" />
 
       <div className="container mx-auto px-6 relative z-10">

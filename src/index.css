@@ -139,6 +139,7 @@
     filter: blur(90px);
     pointer-events: none;
   }
+
 }
 
 @layer utilities {
@@ -156,6 +157,10 @@
 
   .animate-fade-in-up {
     animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.5s ease-out forwards;
   }
 
   .animation-delay-200 {
@@ -210,6 +215,19 @@
     transform: translateY(20px);
   }
   to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    max-height: 2000px;
     opacity: 1;
     transform: translateY(0);
   }

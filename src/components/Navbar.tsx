@@ -15,26 +15,35 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: "/#o6", label: "O6" },
-    { href: "/#l6", label: "L6" },
+    { href: "/#products", label: "Products" },
     { href: "/#sponsorship", label: "Sponsorship" },
     { href: "/#blog", label: "Blog" },
     { href: "/#about", label: "About" },
     { href: "/#contact", label: "Contact" },
-    { href: "/demo", label: "Interactive Demo" },
+    { href: "/#demo", label: "Interactive Demo" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/85 backdrop-blur-xl border-b border-border/60" : "bg-transparent"
+        isScrolled
+          ? "bg-background/85 backdrop-blur-xl border-b border-border/60 shadow-lg"
+          : "bg-background/60 backdrop-blur-md shadow-md"
       }`}
       aria-label="Primary"
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          {/* Logo (configured via public/site-config.js) */}
-          <Link to="/" className="flex items-center" aria-label="Home">
+          {/* Logo (configured via src/config/site.ts) */}
+          <Link
+            to="/"
+            className="flex items-center"
+            aria-label="Home"
+            onClick={(event) => {
+              event.preventDefault();
+              window.location.assign("/");
+            }}
+          >
             {siteConfig.brand.logoUrl ? (
               <img
                 src={siteConfig.brand.logoUrl}
@@ -44,7 +53,7 @@ const Navbar = () => {
               />
             ) : (
               <div className="h-10 px-3 rounded-lg border border-border/70 bg-card/60 backdrop-blur flex items-center justify-center text-sm text-muted-foreground">
-                Set logoUrl in <span className="mx-1 font-medium text-foreground">site-config.js</span>
+                Set logoUrl in <span className="mx-1 font-medium text-foreground">src/config/site.ts</span>
               </div>
             )}
           </Link>

@@ -35,7 +35,7 @@ const features = [
 
 const Technology = () => {
   return (
-    <section id="technology" className="py-32 relative scroll-mt-24">
+    <section id="technology" className="py-32 relative scroll-mt-24 snap-start min-h-screen flex items-center">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/40 to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10">

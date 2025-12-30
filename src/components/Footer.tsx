@@ -1,14 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
 
 const Footer = () => {
   const footerLinks = {
     products: [
-      { label: "Smart Controllers", href: "#o6" },
-      { label: "AI Sensors", href: "#l6" },
-      { label: "Neural Interfaces", href: "#technology" },
-      { label: "Development Kits", href: "#demo" },
+      { label: "Realhand O6", href: "#o6" },
+      { label: "Realhand L6", href: "#l6" },
     ],
     company: [
       { label: "About", href: "#about" },
@@ -16,15 +14,15 @@ const Footer = () => {
       { label: "Blog", href: "#blog" },
       { label: "Contact", href: "#contact" },
     ],
-    resources: [
-      { label: "Documentation", href: "#" },
-      { label: "API Reference", href: "#" },
-      { label: "Support", href: "#" },
-    ],
   };
+  const socialLinks = [
+    { label: "YouTube", href: siteConfig.brand.social.youtubeUrl, icon: Youtube },
+    { label: "Instagram", href: siteConfig.brand.social.instagramUrl, icon: Instagram },
+    { label: "TikTok", href: siteConfig.brand.social.tiktokUrl, icon: "tiktok" as const },
+  ];
 
   return (
-    <footer id="contact" className="relative pt-32 pb-12 border-t border-border/60">
+    <footer id="contact" className="relative pt-20 pb-10 border-t border-border/60">
       <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -64,15 +62,30 @@ const Footer = () => {
                   <span className="text-primary-foreground font-display font-bold text-lg">R</span>
                 </div>
               )}
-              <span className="font-display font-semibold text-xl text-foreground">
-                {siteConfig.brand.companyName}
-              </span>
+              
             </a>
+            <div className="flex items-center gap-4 mb-6 text-muted-foreground">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href || "#"}
+                  className="hover:text-foreground transition-colors"
+                  aria-label={link.label}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {link.icon === "tiktok" ? (
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.6 5.6c-.8-.9-1.3-2-1.3-3.2h-3.1v12.2a2.6 2.6 0 0 1-2.6 2.6 2.6 2.6 0 1 1 2.1-4.1V9.6a5.7 5.7 0 0 0-2.1-.4 5.7 5.7 0 1 0 5.7 5.7V9.2c1.3.9 2.8 1.4 4.4 1.4V7.6c-1.1 0-2.2-.4-3.1-1.3z" />
+                    </svg>
+                  ) : (
+                    <link.icon className="h-5 w-5" />
+                  )}
+                </a>
+              ))}
+            </div>
 
-            <p className="text-muted-foreground mb-6 max-w-sm">
-              Pioneering the future of human-machine interaction through intelligent hardware and
-              advanced AI.
-            </p>
+            
 
             <div className="space-y-3">
               <a
@@ -86,17 +99,17 @@ const Footer = () => {
                 href="tel:+1234567890"
                 className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Phone className="w-4 h-4" />
-                <span>+1 (234) 567-890</span>
+                
               </a>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>San Francisco, CA</span>
+                <span>Palo Alto, CA</span>
               </div>
             </div>
           </div>
 
-          <nav aria-label="Footer" className="contents">
+          <nav aria-label="Footer" className="lg:col-span-3 flex justify-end">
+            <div className="grid grid-cols-2 gap-20 text-right">
             <div>
               <h3 className="font-display font-semibold text-foreground mb-4">Products</h3>
               <ul className="space-y-3">
@@ -112,7 +125,6 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-
             <div>
               <h3 className="font-display font-semibold text-foreground mb-4">Company</h3>
               <ul className="space-y-3">
@@ -128,37 +140,14 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-
-            <div>
-              <h3 className="font-display font-semibold text-foreground mb-4">Resources</h3>
-              <ul className="space-y-3">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
           </nav>
         </div>
 
-        <div className="pt-8 border-t border-border/60 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-border/60 flex items-center justify-center text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} {siteConfig.brand.companyName}. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Terms of Service
-            </a>
-          </div>
         </div>
       </div>
     </footer>

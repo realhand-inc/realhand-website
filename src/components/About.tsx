@@ -1,90 +1,67 @@
-import { Linkedin, Twitter } from 'lucide-react';
-
-const team = [
-  {
-    name: 'Dr. Sarah Chen',
-    role: 'CEO & Co-Founder',
-    bio: 'Former VP of Engineering at a major tech company with 20+ years in AI research.',
-  },
-  {
-    name: 'Marcus Weber',
-    role: 'CTO & Co-Founder',
-    bio: 'Hardware architect with experience designing chips for leading semiconductor companies.',
-  },
-  {
-    name: 'Aisha Patel',
-    role: 'VP of Product',
-    bio: 'Product leader specializing in human-computer interaction and user experience.',
-  },
-  {
-    name: 'James Rodriguez',
-    role: 'VP of Engineering',
-    bio: 'Systems engineer with expertise in embedded systems and real-time computing.',
-  },
-];
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 
 const About = () => {
   return (
-    <section id="about" className="py-32 relative">
+    <section
+      id="about"
+      className="py-20 relative snap-start min-h-screen flex items-center bg-contain bg-right bg-no-repeat"
+      style={{
+        backgroundImage: `linear-gradient(rgba(128, 128, 128, 0.45), rgba(128, 128, 128, 0.45)), url(${siteConfig.media.aboutImageUrl})`,
+      }}
+    >
       <div className="container mx-auto px-6">
-        {/* Mission Statement */}
-        <div className="max-w-4xl mx-auto text-center mb-32">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            About Us
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-8">
-            Building the Bridge Between
-            <br />
-            <span className="text-gradient">Human Intent and Machine Action</span>
-          </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Founded in 2018, RealHand emerged from a simple vision: to create hardware 
-            that truly understands and responds to human needs. We combine decades of 
-            engineering expertise with breakthrough AI research to build devices that 
-            feel like natural extensions of human capability.
-          </p>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
+              About Us
+            </span>
+          </div>
+          <div className="glass-card p-10 text-left">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-8">
+              Who We Are
+            </h2>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              At Realhand, we believe the human hand is the original instrument of innovation — the
+              bridge between thought and creation. Every movement transforms intention into reality.
+            </p>
+            <p className="text-xl text-muted-foreground leading-relaxed mt-6">
+              Now, we’re giving machines that same capability.
+            </p>
+            <p className="text-xl text-muted-foreground leading-relaxed mt-6">
+              By uniting advanced robotics, intelligent sensing, and cloud-based AI, Realhand brings
+              human-level dexterity into automation. Our robotic hands don’t just move — they sense,
+              adapt, and perform with precision and purpose, enabling a new class of intelligent
+              interaction between machines and the world around them.
+            </p>
+            <p className="text-xl text-muted-foreground leading-relaxed mt-6">
+              From industrial automation and logistics to academic research, Realhand empowers
+              innovators to build smarter, faster, and more intuitively than ever before.
+            </p>
+          </div>
         </div>
 
-        {/* Team Section */}
-        <div className="max-w-5xl mx-auto">
-          <h3 className="text-2xl font-display font-semibold text-foreground text-center mb-12">
-            Leadership Team
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="glass-card p-6 text-center group hover:border-primary/30 transition-all duration-300"
-              >
-                {/* Avatar Placeholder */}
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border-2 border-border group-hover:border-primary/30 transition-colors duration-300">
-                  <span className="text-2xl font-display font-bold text-primary">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <h4 className="font-display font-semibold text-foreground mb-1">
-                  {member.name}
-                </h4>
-                <p className="text-primary text-sm mb-3">{member.role}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  {member.bio}
-                </p>
-                <div className="flex justify-center gap-3">
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </a>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    <Twitter className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
+        <div className="max-w-4xl mx-auto mt-8">
+          <div className="glass-card p-10 text-left">
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+              Start with Dexterity
+            </h3>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              Schedule a consultation with our technology specialists to explore how Realhand fits
+              your application.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              We partner with you to understand your workflows, challenges, and goals — then
+              provide clear guidance on integration, customization, and long-term scalability across
+              manufacturing, healthcare, logistics, and research.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              With Realhand®, you’re not just adopting advanced hardware — you’re gaining a trusted
+              partner and a complete ecosystem designed to keep you ahead.
+            </p>
+            <Button asChild variant="hero" size="lg">
+              <a href="#contact">Schedule a consultation</a>
+            </Button>
           </div>
         </div>
       </div>

@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { ArrowRight, Cpu } from "lucide-react";
-import { Link } from "react-router-dom";
 
-const Hero = () => {
+interface HeroProps {
+  onShowDemo: () => void;
+}
+
+const Hero = ({ onShowDemo }: HeroProps) => {
   const heroImage = siteConfig.media.heroProductImageUrl;
   const heroVideo = siteConfig.media.heroVideoUrl;
 
@@ -12,7 +15,7 @@ const Hero = () => {
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
       const match = url.match(regExp);
       return match && match[2].length === 11
-        ? `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&loop=1&playlist=${match[2]}&controls=0`
+        ? `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&loop=1&playlist=${match[2]}&controls=0&modestbranding=1&rel=0&showinfo=0`
         : null;
     } catch (e) {
       return null;
@@ -34,13 +37,12 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          
+
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 animate-fade-in-up animation-delay-200">
             <span className="text-foreground">The Future of </span>
             <span className="text-gradient">Dexterity</span>
-            <span className="text-foreground"> is now</span>
           </h1>
 
           {/* Subtitle / Description */}
@@ -55,38 +57,20 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-start gap-4 animate-fade-in-up animation-delay-600">
-            <Button variant="hero" size="xl">
-              Explore Products
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Link to="/demo">
-              <Button variant="glass" size="xl">
-                Watch Demo
+          <div className="flex flex-col sm:flex-row items-center justify-start gap-4 mb-16 animate-fade-in-up animation-delay-600">
+            <a href="#products" className="w-full sm:w-auto">
+              <Button variant="hero" size="xl" className="w-full sm:w-64">
+                Explore Products
+                <ArrowRight className="w-5 h-5" />
               </Button>
-            </Link>
+            </a>
+            <Button variant="glass" size="xl" onClick={onShowDemo} className="w-full sm:w-64">
+              Interactive Demo
+            </Button>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-20 pt-10 border-t border-border/50 animate-fade-in-up animation-delay-600">
-            {[
-              { value: "50+", label: "Patents" },
-              { value: "10M+", label: "Devices Shipped" },
-              { value: "99.9%", label: "Uptime" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Product Showcase */}
-        <section className="mt-20 relative" aria-label="Product preview">
-          <div className="glass-card p-1 max-w-4xl mx-auto">
+          {/* Product Showcase */}
+          <div className="glass-card p-1 w-full">
             <div className="aspect-video rounded-2xl bg-card/70 border border-border/60 flex items-center justify-center relative overflow-hidden shadow-soft">
               <div className="absolute inset-0 grid-pattern opacity-15" />
 
@@ -114,13 +98,13 @@ const Hero = () => {
                   <span className="text-muted-foreground font-medium">
                     Set <span className="font-semibold text-foreground">media.heroVideoUrl</span> or{" "}
                     <span className="font-semibold text-foreground">media.heroProductImageUrl</span> in
-                    public/site-config.js
+                    src/config/site.ts
                   </span>
                 </div>
               )}
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </header>
   );

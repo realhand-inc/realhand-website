@@ -10,9 +10,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SponsorshipForm = () => {
+  const storageKey = "realhand_sponsorship_form";
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -35,11 +36,58 @@ const SponsorshipForm = () => {
     consentPrivacyPolicy: false,
   });
 
+  useEffect(() => {
+    const navigationEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    if (navigationEntry?.type === "reload") {
+      localStorage.removeItem(storageKey);
+      return;
+    }
+
+    const savedData = localStorage.getItem(storageKey);
+    if (!savedData) {
+      return;
+    }
+    try {
+      const parsed = JSON.parse(savedData);
+      if (parsed && typeof parsed === "object") {
+        setFormData((prev) => ({ ...prev, ...parsed }));
+      }
+    } catch {
+      // Ignore invalid saved data.
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(formData));
+  }, [formData, storageKey]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Email integration will be added here later
     console.log("Form submitted:", formData);
     alert("Form submitted! Email integration will be configured later.");
+    localStorage.removeItem(storageKey);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      position: "",
+      institution: "",
+      department: "",
+      address1: "",
+      address2: "",
+      state: "",
+      zipCode: "",
+      country: "",
+      websiteOrLinkedIn: "",
+      researchFocus: "",
+      publications: "",
+      consentAccuracy: false,
+      consentDataProcessing: false,
+      consentNoGuarantee: false,
+      consentPrivacyPolicy: false,
+    });
   };
 
   const handleInputChange = (
@@ -126,7 +174,7 @@ const SponsorshipForm = () => {
         <Label htmlFor="position">
           Describe your current position <span className="text-destructive">*</span>
         </Label>
-        <Select onValueChange={handleSelectChange} required>
+        <Select value={formData.position} onValueChange={handleSelectChange} required>
           <SelectTrigger>
             <SelectValue placeholder="Select an option" />
           </SelectTrigger>
@@ -174,11 +222,7 @@ const SponsorshipForm = () => {
         <Label className="text-base font-semibold">
           Address (required if selected)
         </Label>
-        <p className="text-sm text-muted-foreground">
-          Your address will only be used to ship our products if your application is selected and
-          approved. For more details on how we handle personal information, please refer to our
-          CCPA-compliant Privacy Policy listed below or e-mail us at privacy@realhand.com.
-        </p>
+
 
         <div className="space-y-4">
           <div className="space-y-2">
