@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { Menu, X } from "lucide-react";
@@ -14,13 +15,13 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#o6", label: "O6" },
-    { href: "#l6", label: "L6" },
-    { href: "#demo", label: "Demo" },
-    { href: "#sponsorship", label: "Sponsorship" },
-    { href: "#blog", label: "Blog" },
-    { href: "#contact", label: "Contact" },
+    { href: "/#o6", label: "O6" },
+    { href: "/#l6", label: "L6" },
+    { href: "/#sponsorship", label: "Sponsorship" },
+    { href: "/#blog", label: "Blog" },
+    { href: "/#about", label: "About" },
+    { href: "/#contact", label: "Contact" },
+    { href: "/demo", label: "Interactive Demo" },
   ];
 
   return (
@@ -33,7 +34,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo (configured via public/site-config.js) */}
-          <a href="#" className="flex items-center" aria-label="Home">
+          <Link to="/" className="flex items-center" aria-label="Home">
             {siteConfig.brand.logoUrl ? (
               <img
                 src={siteConfig.brand.logoUrl}
@@ -46,25 +47,19 @@ const Navbar = () => {
                 Set logoUrl in <span className="mx-1 font-medium text-foreground">site-config.js</span>
               </div>
             )}
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6 ml-auto">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium text-sm"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-          </div>
-
-          <div className="hidden lg:block">
-            <Button variant="hero" size="default">
-              Get Started
-            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -84,18 +79,15 @@ const Navbar = () => {
         <div className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border/60">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <Button variant="hero" size="lg" className="mt-4">
-              Get Started
-            </Button>
           </div>
         </div>
       )}

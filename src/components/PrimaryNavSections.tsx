@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, Box, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Box, Sparkles } from "lucide-react";
+import SponsorshipForm from "@/components/SponsorshipForm";
+import { Link } from "react-router-dom";
 
 const SectionHeader = ({
   label,
@@ -105,63 +107,71 @@ const PrimaryNavSections = () => {
         imageUrl={siteConfig.media.l6ImageUrl}
       />
 
-      <section id="demo" className="py-24 scroll-mt-24">
-        <div className="container mx-auto px-6">
-          <div className="glass-card p-10 md:p-14 text-center">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-              <Play className="h-4 w-4" />
-              Demo
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              See it in action
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-              Add a demo poster image URL in the config now, and we’ll replace this with your real video
-              embed when you’re ready.
-            </p>
-
-            <div className="glass-card p-1 max-w-4xl mx-auto">
-              <div className="relative aspect-video rounded-2xl overflow-hidden bg-card">
-                {siteConfig.media.demoPosterImageUrl ? (
-                  <img
-                    src={siteConfig.media.demoPosterImageUrl}
-                    alt="Product demo preview"
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : (
-                  <div className="absolute inset-0 grid-pattern opacity-20" />
-                )}
-                <div className="relative z-10 h-full w-full flex items-center justify-center">
-                  <Button variant="hero" size="lg">
-                    Play demo
-                    <Play className="h-5 w-5" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="sponsorship" className="py-24 scroll-mt-24">
         <div className="container mx-auto px-6">
-          <SectionHeader
-            label="Sponsorship"
-            title="Partner with RealHand"
-            subtitle="We collaborate with teams and communities building the future—hardware, robotics, and applied AI."
-          />
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                Sponsorship
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+                Scholar Sponsorship Program
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                The RealHand™ Scholar Sponsorship Program is a prestigious initiative designed to
+                empower groundbreaking research in AI, robotics, machine learning, and computer
+                vision. Through this program, leading researchers, labs, and academic institutions
+                can gain complimentary access to our flagship dexterous robotic hand, enabling them
+                to push the boundaries of embodied intelligence and accelerate technological
+                breakthroughs.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                By partnering with top innovators and providing cutting-edge tools, RealHand® is
+                committed to advancing the future of human-robot collaboration and shaping the next
+                generation of intelligent systems.{" "}
+                <Link to="/demo" className="text-primary hover:underline font-medium">
+                  Watch Demo here
+                </Link>
+                .
+              </p>
+              <p className="text-muted-foreground text-base">
+                Please complete the following details to apply for the Realhand™ Scholar Sponsorship
+                Program. This information helps us evaluate your eligibility and deliver equipment if
+                selected.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {["Events", "Research", "Builders"].map((item) => (
-              <article key={item} className="glass-card p-8">
-                <h3 className="text-xl font-display font-semibold text-foreground mb-2">{item}</h3>
-                <p className="text-muted-foreground">
-                  Tell us what you’re building and we’ll tailor support—from equipment to engineering time.
-                </p>
-              </article>
-            ))}
+            {/* Form */}
+            <div className="glass-card p-8 md:p-10">
+              <SponsorshipForm />
+            </div>
+
+            {/* Privacy Notice */}
+            <div className="mt-12 glass-card p-8">
+              <h3 className="text-xl font-display font-bold text-foreground mb-4">
+                Privacy Notice
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                In compliance with the California Consumer Privacy Act (CCPA), your personal
+                information will be used exclusively to assess your eligibility and, if selected,
+                facilitate communication and delivery of the sponsored equipment. We do not share or
+                sell your data to third parties. For details, please review our company's Privacy
+                Policy or e-mail us at{" "}
+                <a href="mailto:privacy@realhand.com" className="text-primary hover:underline">
+                  privacy@realhand.com
+                </a>
+                .
+              </p>
+
+              <h4 className="text-lg font-display font-bold text-foreground mb-4">Disclaimer</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                This Privacy Policy is provided for informational purposes only and does not create
+                any contractual rights or legal obligations beyond those required by applicable law.
+                In the event of a conflict between this Policy and applicable privacy laws, the
+                latter shall prevail.
+              </p>
+            </div>
           </div>
         </div>
       </section>

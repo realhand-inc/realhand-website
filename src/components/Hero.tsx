@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, Cpu, Zap } from "lucide-react";
+import { ArrowRight, Cpu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const heroImage = siteConfig.media.heroProductImageUrl;
@@ -32,12 +33,8 @@ const Hero = () => {
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-[130px]" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/70 backdrop-blur-sm border border-border/60 mb-8 animate-fade-in-up">
-            <Zap className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">Hardware meets Artificial Intelligence</span>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 animate-fade-in-up animation-delay-200">
@@ -47,25 +44,27 @@ const Hero = () => {
           </h1>
 
           {/* Subtitle / Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed animate-fade-in-up animation-delay-400">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-6 leading-relaxed animate-fade-in-up animation-delay-400">
             Step into a world where robotics adapt to you. Our AI-powered hands bring human-like dexterity to your team and workflow, making every task smoother, safer, and more collaborative.
           </p>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed animate-fade-in-up animation-delay-500">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-6 leading-relaxed animate-fade-in-up animation-delay-500">
             Dexterous manipulation is the next frontier in robotics. As automation and tele-operation expand globally, human-like hands will unlock massive productivity gains in manufacturing, logistics, and service robotics. Realhand™ is positioned to lead this transformation with proprietary technology and scalable integration pathways.
           </p>
-          <p className="text-base md:text-lg font-semibold text-primary max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up animation-delay-600">
-            Let’s build the future of dexterity together.
+          <p className="text-base md:text-lg font-semibold text-primary max-w-2xl mb-10 leading-relaxed animate-fade-in-up animation-delay-600">
+            Let's build the future of dexterity together.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-600">
+          <div className="flex flex-col sm:flex-row items-center justify-start gap-4 animate-fade-in-up animation-delay-600">
             <Button variant="hero" size="xl">
               Explore Products
               <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button variant="glass" size="xl">
-              Watch Demo
-            </Button>
+            <Link to="/demo">
+              <Button variant="glass" size="xl">
+                Watch Demo
+              </Button>
+            </Link>
           </div>
 
           {/* Stats */}

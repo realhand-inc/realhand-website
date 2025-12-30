@@ -121,8 +121,7 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background: var(--gradient-primary);
+    @apply text-primary;
   }
 
   .grid-pattern {
