@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 const SponsorshipForm = () => {
   const storageKey = "realhand_sponsorship_form";
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -63,31 +64,51 @@ const SponsorshipForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Email integration will be added here later
-    console.log("Form submitted:", formData);
-    alert("Form submitted! Email integration will be configured later.");
-    localStorage.removeItem(storageKey);
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      position: "",
-      institution: "",
-      department: "",
-      address1: "",
-      address2: "",
-      state: "",
-      zipCode: "",
-      country: "",
-      websiteOrLinkedIn: "",
-      researchFocus: "",
-      publications: "",
-      consentAccuracy: false,
-      consentDataProcessing: false,
-      consentNoGuarantee: false,
-      consentPrivacyPolicy: false,
-    });
+    if (status === "sending") return;
+    setStatus("sending");
+
+    const payload = {
+      ...formData,
+      pageUrl: typeof window !== "undefined" ? window.location.href : "",
+    };
+
+    fetch("/api/sponsorship", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+
+        localStorage.removeItem(storageKey);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          position: "",
+          institution: "",
+          department: "",
+          address1: "",
+          address2: "",
+          state: "",
+          zipCode: "",
+          country: "",
+          websiteOrLinkedIn: "",
+          researchFocus: "",
+          publications: "",
+          consentAccuracy: false,
+          consentDataProcessing: false,
+          consentNoGuarantee: false,
+          consentPrivacyPolicy: false,
+        });
+        setStatus("success");
+      })
+      .catch(() => {
+        setStatus("error");
+      });
   };
 
   const handleInputChange = (
@@ -416,9 +437,17 @@ const SponsorshipForm = () => {
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" variant="hero" size="xl" className="w-full">
-        Submit Application
-      </Button>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button type="submit" variant="hero" size="xl" className="w-full" disabled={status === "sending"}>
+          {status === "sending" ? "Submitting..." : "Submit Application"}
+        </Button>
+        {status === "success" && (
+          <span className="text-sm text-emerald-600">Application sent. We will be in touch.</span>
+        )}
+        {status === "error" && (
+          <span className="text-sm text-destructive">Something went wrong. Please try again.</span>
+        )}
+      </div>
     </form>
   );
 };
