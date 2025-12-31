@@ -91,7 +91,7 @@ const BlogSection = () => {
                   </div>
                 </article>
               </DialogTrigger>
-            <DialogContent className="max-w-3xl">
+            <DialogContent className="max-w-3xl w-[95vw] max-h-[85vh] overflow-y-auto p-4 sm:p-6">
               <DialogHeader>
                 <p className="text-sm text-muted-foreground">{post.date}</p>
                 <DialogTitle className="text-2xl font-display font-bold">
@@ -109,6 +109,16 @@ const BlogSection = () => {
                 {post.description.split("\n\n").map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
+              </div>
+              <div className="mt-6 flex justify-end">
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    className="rounded-full border border-border/70 px-4 py-2 text-sm font-medium text-foreground transition hover:bg-muted/60"
+                  >
+                    Back
+                  </button>
+                </DialogTrigger>
               </div>
               </DialogContent>
             </Dialog>

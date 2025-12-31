@@ -42,7 +42,7 @@ const newProducts = [
 
 const L6Details = () => (
   <div className="bg-card/80 text-foreground">
-    <div className="px-6 py-10 md:px-10">
+    <div className="px-4 py-10 sm:px-6 md:px-10">
       <div className="text-center space-y-3">
         <img
           src="https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/6982410d-ce14-41c0-b7d1-319b66597546/REALHAND+CMYK+MAIN+COLOR+BOLD+AND+THIN+WITHOUT+LINE.png?format=1500w"
@@ -59,7 +59,7 @@ const L6Details = () => (
       </div>
 
       <div className="mt-10 space-y-8">
-        <div className="glass-card p-4 md:p-6">
+        <div className="glass-card p-3 sm:p-4 md:p-6">
           <div className="relative aspect-video overflow-hidden rounded-xl bg-muted/40">
             <iframe
               className="absolute inset-0 h-full w-full"
@@ -71,7 +71,7 @@ const L6Details = () => (
           </div>
         </div>
 
-        <div className="glass-card p-4 md:p-6">
+        <div className="glass-card p-3 sm:p-4 md:p-6">
           <img
             src="https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/2287c229-4fde-4e65-aad4-0b51dc79c948/L6+Cover+Image.png?content-type=image%2Fpng"
             alt="Realhand L6 Main Product Image"
@@ -172,7 +172,7 @@ const L6Details = () => (
 
 const O6Details = () => (
   <div className="bg-card/80 text-foreground">
-    <div className="px-6 py-10 md:px-10">
+    <div className="px-4 py-10 sm:px-6 md:px-10">
       <div className="text-center space-y-3">
         <img
           src="https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/6982410d-ce14-41c0-b7d1-319b66597546/REALHAND+CMYK+MAIN+COLOR+BOLD+AND+THIN+WITHOUT+LINE.png?format=1500w"
@@ -189,7 +189,7 @@ const O6Details = () => (
       </div>
 
       <div className="mt-10 space-y-8">
-        <div className="glass-card p-4 md:p-6">
+        <div className="glass-card p-3 sm:p-4 md:p-6">
           <div className="relative aspect-video overflow-hidden rounded-xl bg-muted/40">
             <iframe
               className="absolute inset-0 h-full w-full"
@@ -209,7 +209,7 @@ const O6Details = () => (
           </div>
         </div>
 
-        <div className="glass-card p-4 md:p-6">
+        <div className="glass-card p-3 sm:p-4 md:p-6">
           <h3 className="text-xl font-display font-semibold">Feature Gallery</h3>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             <img
