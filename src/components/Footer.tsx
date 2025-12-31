@@ -104,7 +104,7 @@ const Footer = () => {
               </a>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>Palo Alto, CA</span>
+                <span>325 Forest Ave, Palo Alto, CA</span>
               </div>
             </div>
           </div>
