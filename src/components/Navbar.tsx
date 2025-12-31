@@ -64,7 +64,7 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium text-sm"
+                className="inline-flex items-center rounded-full px-3 py-2 text-muted-foreground transition-all duration-200 font-medium text-sm hover:text-foreground hover:bg-foreground/10 hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {link.label}
               </Link>
@@ -91,7 +91,7 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium py-2"
+                className="inline-flex items-center rounded-full px-3 py-2 text-muted-foreground transition-all duration-200 font-medium hover:text-foreground hover:bg-foreground/10 hover:shadow-[0_10px_28px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}

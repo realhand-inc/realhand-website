@@ -1,6 +1,7 @@
+import ContactDialog from "@/components/ContactDialog";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
+import { ArrowRight, Instagram, Mail, MapPin, Youtube } from "lucide-react";
 
 const Footer = () => {
   const footerLinks = {
@@ -35,10 +36,14 @@ const Footer = () => {
               Talk to our team about deployments, integrations, and next-gen hardware + AI workflows.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="lg">
-                Contact Sales
-                <ArrowRight className="w-5 h-5" />
-              </Button>
+              <ContactDialog
+                trigger={
+                  <Button variant="hero" size="lg">
+                    Contact Sales
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                }
+              />
               <Button variant="glass" size="lg">
                 Request Demo
               </Button>

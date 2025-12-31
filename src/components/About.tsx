@@ -1,3 +1,4 @@
+import ContactDialog from "@/components/ContactDialog";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
@@ -59,9 +60,13 @@ const About = () => {
               With Realhand®, you’re not just adopting advanced hardware — you’re gaining a trusted
               partner and a complete ecosystem designed to keep you ahead.
             </p>
-            <Button asChild variant="hero" size="lg">
-              <a href="#contact">Schedule a consultation</a>
-            </Button>
+            <ContactDialog
+              trigger={
+                <Button variant="hero" size="lg">
+                  Schedule a consultation
+                </Button>
+              }
+            />
           </div>
         </div>
       </div>
