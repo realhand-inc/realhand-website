@@ -8,10 +8,19 @@ const SEO = () => {
   useEffect(() => {
     const { seo, seoSections } = siteConfig;
     const hashKey = location.hash.replace("#", "").trim();
-    const sectionOverrides = (hashKey && seoSections ? seoSections[hashKey] : undefined) ?? {};
+    const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
+    const pathKey =
+      normalizedPath === "/o6" ? "o6" : normalizedPath === "/l6" ? "l6" : normalizedPath === "/demo" ? "demo" : "";
+    const sectionKey = pathKey || hashKey;
+    const sectionOverrides = (sectionKey && seoSections ? seoSections[sectionKey] : undefined) ?? {};
     const mergedSeo = { ...seo, ...sectionOverrides };
     const baseCanonical = mergedSeo.canonicalUrl || seo.canonicalUrl;
-    const canonicalUrl = hashKey ? `${baseCanonical.replace(/\/$/, "")}/#${hashKey}` : baseCanonical;
+    const trimmedCanonical = baseCanonical.replace(/\/$/, "");
+    const canonicalUrl = pathKey
+      ? `${trimmedCanonical}${normalizedPath}`
+      : hashKey
+        ? `${trimmedCanonical}/#${hashKey}`
+        : baseCanonical;
 
     // Update document title
     document.title = mergedSeo.title;
@@ -83,7 +92,7 @@ const SEO = () => {
       };
       scriptTag.textContent = JSON.stringify(schema, null, 2);
     }
-  }, [location.hash]);
+  }, [location.hash, location.pathname]);
 
   return null; // This component doesn't render anything
 };

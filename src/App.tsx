@@ -19,6 +19,9 @@ const App = () => (
       <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/o6" element={<Index forcedSection="o6" />} />
+          <Route path="/l6" element={<Index forcedSection="l6" />} />
+          <Route path="/demo" element={<Index forcedSection="demo" />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

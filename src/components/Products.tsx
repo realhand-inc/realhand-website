@@ -249,7 +249,7 @@ const O6Details = () => (
             <img
               src="https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/9f41ea3e-fc5c-4d37-9191-ed084d19094c/9.png?content-type=image%2Fpng"
               alt="O6 Gripping Demo"
-              className="w-full rounded-xl bg-muted/30 object-contain"
+              className="mx-auto w-2/3 rounded-xl bg-muted/30 object-contain"
             />
           </div>
         </div>
