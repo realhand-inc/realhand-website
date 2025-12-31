@@ -164,28 +164,28 @@ const Index = ({ forcedSection = null }: IndexProps) => {
         )}
         {isAnnouncementExpanded && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6"
             role="dialog"
             aria-modal="true"
             aria-label="Announcement"
             onClick={closeAnnouncementExpanded}
           >
             <div
-              className="relative w-full max-w-3xl rounded-xl border border-border/60 bg-background p-6 shadow-2xl"
+              className="relative w-full max-w-[95vw] sm:max-w-2xl lg:max-w-3xl rounded-xl border border-border/60 bg-background p-3 sm:p-6 shadow-2xl"
               onClick={(event) => event.stopPropagation()}
             >
               <button
                 type="button"
-                className="absolute right-4 top-4 rounded-full bg-muted/70 p-2 text-foreground transition hover:bg-muted"
+                className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-full bg-muted/70 p-1.5 sm:p-2 text-foreground transition hover:bg-muted z-10"
                 onClick={closeAnnouncementExpanded}
                 aria-label="Close announcement"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
               <img
                 src="https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/1abc0009-2397-4b84-a2ce-b88b27b05d9d/CES_2026.png?content-type=image%2Fpng"
                 alt="CES 2026 announcement"
-                className="h-auto w-full rounded-lg"
+                className="w-full max-h-[calc(90vh-6rem)] sm:max-h-[calc(90vh-8rem)] object-contain rounded-lg"
                 loading="lazy"
                 decoding="async"
               />

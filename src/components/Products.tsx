@@ -29,14 +29,16 @@ const newProducts = [
     name: "Realhand L20",
     description:
       "Compact, power-efficient platform designed for scalable deployments and embedded automation.",
-    imageUrl: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/9254a520-10e9-4c6d-b6a0-90df548578b5/Photoroom_20250930_205853.JPG?format=2500w",
+    imageUrl:
+      "https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/9c636ebb-0e12-4d54-9ada-f69d2a513d72/image19.png?content-type=image%2Fpng",
   },
   {
     id: "l30",
     name: "Realhand L30",
     description:
       "Higher-performance dexterous hardware built for demanding manipulation tasks and advanced control.",
-    imageUrl: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/7304e205-68b7-4377-b038-60f1c33c8526/Photoroom_20250930_210107.JPG?format=2500w",
+    imageUrl:
+      "https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/980aea1a-d814-453b-8b2f-4e3e625e9ed8/image16.png?content-type=image%2Fpng",
   },
 ];
 

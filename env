@@ -1,0 +1,6 @@
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_USER=richard@realhand.com
+SMTP_PASS=glmhwxqcakwrbrmr
+CONTACT_SENDER_EMAIL=richard@realhand.com
+CONTACT_RECIPIENT_EMAILS=mark@realhand.com,richard@realhand.com

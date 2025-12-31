@@ -1,5 +1,4 @@
-const TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
-const GMAIL_SEND_ENDPOINT = "https://gmail.googleapis.com/gmail/v1/users/me/messages/send";
+import nodemailer from "nodemailer";
 
 const getEnv = (key: string) => {
   const value = process.env[key];
@@ -8,13 +7,6 @@ const getEnv = (key: string) => {
   }
   return value;
 };
-
-const encodeBase64Url = (input: string) =>
-  Buffer.from(input, "utf8")
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
 
 const formatEmailBody = (data: {
   name: string;
@@ -36,25 +28,6 @@ const formatEmailBody = (data: {
   ].join("\n");
 };
 
-const buildRawEmail = (params: {
-  from: string;
-  to: string[];
-  replyTo: string;
-  subject: string;
-  body: string;
-}) => {
-  const headers = [
-    `From: ${params.from}`,
-    `To: ${params.to.join(", ")}`,
-    `Reply-To: ${params.replyTo}`,
-    `Subject: ${params.subject}`,
-    "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
-  ];
-
-  return `${headers.join("\n")}\n\n${params.body}`;
-};
-
 export default async function handler(request: any, response: any) {
   if (request.method !== "POST") {
     response.status(405).json({ ok: false, error: "Method not allowed" });
@@ -62,9 +35,10 @@ export default async function handler(request: any, response: any) {
   }
 
   try {
-    const clientId = getEnv("GOOGLE_CLIENT_ID");
-    const clientSecret = getEnv("GOOGLE_CLIENT_SECRET");
-    const refreshToken = getEnv("GOOGLE_REFRESH_TOKEN");
+    const smtpHost = getEnv("SMTP_HOST");
+    const smtpPort = Number(getEnv("SMTP_PORT"));
+    const smtpUser = getEnv("SMTP_USER");
+    const smtpPass = getEnv("SMTP_PASS");
     const senderEmail = getEnv("CONTACT_SENDER_EMAIL");
     const recipients = getEnv("CONTACT_RECIPIENT_EMAILS").split(",").map((email) => email.trim());
 
@@ -94,50 +68,23 @@ export default async function handler(request: any, response: any) {
       timestamp,
     });
 
-    const tokenResponse = await fetch(TOKEN_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
-        refresh_token: refreshToken,
-        grant_type: "refresh_token",
-      }),
+    const transport = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
     });
 
-    if (!tokenResponse.ok) {
-      const errorText = await tokenResponse.text();
-      response.status(500).json({ ok: false, error: "Failed to fetch access token.", details: errorText });
-      return;
-    }
-
-    const tokenJson = await tokenResponse.json();
-    const accessToken = tokenJson.access_token;
-
-    const rawMessage = buildRawEmail({
+    await transport.sendMail({
       from: senderEmail,
       to: recipients,
       replyTo: email,
       subject,
-      body: emailBody,
+      text: emailBody,
     });
-
-    const gmailResponse = await fetch(GMAIL_SEND_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        raw: encodeBase64Url(rawMessage),
-      }),
-    });
-
-    if (!gmailResponse.ok) {
-      const errorText = await gmailResponse.text();
-      response.status(500).json({ ok: false, error: "Failed to send email.", details: errorText });
-      return;
-    }
 
     response.status(200).json({ ok: true });
   } catch (error: any) {
