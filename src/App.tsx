@@ -8,8 +8,8 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Use basename for production (GitHub Pages), root for development
-const basename = import.meta.env.PROD ? "/realhand-website" : "";
+const baseUrl = import.meta.env.BASE_URL || "/";
+const basename = baseUrl === "/" ? "" : baseUrl.replace(/\/$/, "");
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

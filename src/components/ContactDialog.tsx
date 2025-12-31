@@ -13,11 +13,49 @@ type ContactDialogProps = {
 };
 
 const ContactDialog = ({ trigger }: ContactDialogProps) => {
+  const [status, setStatus] = React.useState<"idle" | "sending" | "success" | "error">("idle");
+
   const handleOpenChange = (open: boolean) => {
     if (open) {
       lockBodyScroll();
     } else {
       unlockBodyScroll();
+      setStatus("idle");
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (status === "sending") return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      firstName: String(formData.get("firstName") ?? "").trim(),
+      lastName: String(formData.get("lastName") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+      pageUrl: typeof window !== "undefined" ? window.location.href : "",
+    };
+
+    setStatus("sending");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        setStatus("error");
+        return;
+      }
+
+      form.reset();
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
     }
   };
 
@@ -66,7 +104,7 @@ const ContactDialog = ({ trigger }: ContactDialogProps) => {
                 </p>
               </div>
 
-              <form className="grid gap-5">
+              <form className="grid gap-5" onSubmit={handleSubmit}>
                 <div className="grid gap-3">
                   <Label className="text-sm font-medium text-foreground">
                     Name <span className="text-muted-foreground">(required)</span>
@@ -107,9 +145,17 @@ const ContactDialog = ({ trigger }: ContactDialogProps) => {
                   />
                 </div>
 
-                <Button type="button" variant="hero" className="w-full sm:w-auto">
-                  SEND
-                </Button>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button type="submit" variant="hero" className="w-full sm:w-auto" disabled={status === "sending"}>
+                    {status === "sending" ? "SENDING..." : "SEND"}
+                  </Button>
+                  {status === "success" && (
+                    <span className="text-sm text-emerald-600">Message sent. We will reply soon.</span>
+                  )}
+                  {status === "error" && (
+                    <span className="text-sm text-destructive">Something went wrong. Please try again.</span>
+                  )}
+                </div>
               </form>
             </div>
           </div>
