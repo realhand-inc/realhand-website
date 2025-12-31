@@ -64,11 +64,11 @@ npm run preview
 
 ## Deployment
 
-The site is configured for deployment at the root domain.
+The site is configured for GitHub Pages deployment at `/realhand-website/`.
 
 Build settings:
-- Base path: `/` (root)
-- Router basename: Not set (root path)
+- Base path: `/realhand-website/`
+- Router basename: `/realhand-website`
 
 ## Features
 
