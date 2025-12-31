@@ -7,36 +7,58 @@ import DemoSection from "@/components/DemoSection";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Index = () => {
   const location = useLocation();
-  const [showDemo, setShowDemo] = useState(false);
+  const navigate = useNavigate();
+  const activeHash = location.hash.replace("#", "");
+  const activeProductId = activeHash === "o6" || activeHash === "l6" ? activeHash : null;
+  const isDemoOpen = activeHash === "demo";
+
+  const setHashValue = (value: string) => {
+    navigate(
+      {
+        pathname: location.pathname,
+        search: location.search,
+        hash: value ? `#${value}` : "",
+      },
+      { replace: false }
+    );
+  };
+
+  const clearHash = () => {
+    if (!location.hash) return;
+    navigate(
+      {
+        pathname: location.pathname,
+        search: location.search,
+        hash: "",
+      },
+      { replace: true }
+    );
+  };
 
   useEffect(() => {
     // Handle hash navigation (e.g., /#about, /#o6, /#demo)
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
+    if (!location.hash) return;
 
-      // If navigating to demo, open the modal
-      if (id === 'demo') {
-        setShowDemo(true);
-        return;
-      }
-
-      const element = document.getElementById(id);
-      if (element) {
-        // Use setTimeout to ensure the page has rendered
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
+    if (activeHash === "demo" || activeHash === "o6" || activeHash === "l6") {
+      return;
     }
-  }, [location]);
+
+    const element = document.getElementById(activeHash);
+    if (element) {
+      // Use setTimeout to ensure the page has rendered
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [activeHash, location.hash]);
 
   const handleShowDemo = () => {
-    setShowDemo(true);
+    setHashValue("demo");
   };
 
   const SectionDivider = () => (
@@ -51,9 +73,13 @@ const Index = () => {
       <main className="min-h-screen bg-background">
         <Navbar />
         <Hero onShowDemo={handleShowDemo} />
-        <DemoSection isOpen={showDemo} onClose={() => setShowDemo(false)} />
+        <DemoSection isOpen={isDemoOpen} onClose={clearHash} />
         <SectionDivider />
-        <Products />
+        <Products
+          activeProductId={activeProductId}
+          onProductOpen={(id) => setHashValue(id)}
+          onProductClose={clearHash}
+        />
         <SectionDivider />
         <Sponsorship />
         <SectionDivider />

@@ -25,7 +25,7 @@ const Hero = ({ onShowDemo }: HeroProps) => {
   const videoEmbedUrl = heroVideo ? getYoutubeEmbedUrl(heroVideo) : null;
 
   return (
-    <header className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <header className="relative min-h-[max(700px,100svh)] flex items-center justify-center overflow-hidden pt-20">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-pattern opacity-25" />
       <div className="hero-glow top-1/4 left-1/4 animate-pulse-glow" />
@@ -40,7 +40,7 @@ const Hero = ({ onShowDemo }: HeroProps) => {
 
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 animate-fade-in-up animation-delay-200">
+          <h1 className="mt-6 sm:mt-8 text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 animate-fade-in-up animation-delay-200">
             <span className="text-foreground">The Future of </span>
             <span className="text-gradient">Dexterity</span>
           </h1>

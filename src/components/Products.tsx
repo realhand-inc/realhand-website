@@ -292,7 +292,15 @@ const O6Details = () => (
   </div>
 );
 
-const Products = () => {
+type ProductId = "o6" | "l6";
+
+interface ProductsProps {
+  activeProductId: ProductId | null;
+  onProductOpen: (id: ProductId) => void;
+  onProductClose: () => void;
+}
+
+const Products = ({ activeProductId, onProductOpen, onProductClose }: ProductsProps) => {
   return (
     <section id="products" className="py-16 scroll-mt-24">
       <div className="container mx-auto px-6">
@@ -353,8 +361,22 @@ const Products = () => {
 
             if (product.id === "l6" || product.id === "o6") {
               const details = product.id === "l6" ? <L6Details /> : <O6Details />;
+              const isOpen = activeProductId === product.id;
               return (
-                <Dialog key={product.id}>
+                <Dialog
+                  key={product.id}
+                  open={isOpen}
+                  onOpenChange={(open) => {
+                    if (open) {
+                      onProductOpen(product.id);
+                      return;
+                    }
+
+                    if (isOpen) {
+                      onProductClose();
+                    }
+                  }}
+                >
                   <DialogTrigger asChild>
                     <button
                       id={product.id}

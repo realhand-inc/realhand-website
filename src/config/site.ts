@@ -1,3 +1,18 @@
+export type SeoConfig = {
+  title: string;
+  description: string;
+  keywords: string;
+  author: string;
+  canonicalUrl: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+  ogType: string;
+  twitterCard: string;
+  twitterSite: string;
+  twitterImage: string;
+};
+
 export type SiteConfig = {
   brand: {
     companyName: string;
@@ -17,20 +32,8 @@ export type SiteConfig = {
     demoPosterImageUrl: string;
     aboutImageUrl: string;
   };
-  seo: {
-    title: string;
-    description: string;
-    keywords: string;
-    author: string;
-    canonicalUrl: string;
-    ogTitle: string;
-    ogDescription: string;
-    ogImage: string;
-    ogType: string;
-    twitterCard: string;
-    twitterSite: string;
-    twitterImage: string;
-  };
+  seo: SeoConfig;
+  seoSections?: Record<string, Partial<SeoConfig>>;
 };
 
 const defaultConfig: SiteConfig = {
@@ -67,6 +70,60 @@ const defaultConfig: SiteConfig = {
     twitterSite: "@RealhandInc",
     twitterImage: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/4123c426-def1-45c0-bf02-dd8acf323558/O6+Cover+Photo.png?format=1500w",
   },
+  seoSections: {
+    o6: {
+      title: "Realhand O6 | Dexterous Robotic Hand",
+      description: "Realhand O6 is a high-precision bionic hand with 6 active and 5 passive joints, built for logistics, assembly, and handling irregular objects.",
+      ogTitle: "Realhand O6 | Dexterous Robotic Hand",
+      ogDescription: "Explore Realhand O6 specs, videos, and performance details.",
+      ogImage: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/4123c426-def1-45c0-bf02-dd8acf323558/O6+Cover+Photo.png?format=1500w",
+      twitterImage: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/4123c426-def1-45c0-bf02-dd8acf323558/O6+Cover+Photo.png?format=1500w",
+    },
+    l6: {
+      title: "Realhand L6 | Dexterous Robotic Hand",
+      description: "Realhand L6 is a compact, power-efficient dexterous hand designed for embedded and scaled deployments.",
+      ogTitle: "Realhand L6 | Dexterous Robotic Hand",
+      ogDescription: "View the Realhand L6 manual, dimensions, and performance details.",
+      ogImage: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/2287c229-4fde-4e65-aad4-0b51dc79c948/L6+Cover+Image.png?format=1500w",
+      twitterImage: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/2287c229-4fde-4e65-aad4-0b51dc79c948/L6+Cover+Image.png?format=1500w",
+    },
+    demo: {
+      title: "Interactive Demo | RealHand",
+      description: "Try the RealHand interactive demo to control a robot hand model with your webcam.",
+      ogTitle: "Interactive Demo | RealHand",
+      ogDescription: "Use your webcam to capture hand pose and control the RealHand simulation.",
+    },
+    products: {
+      title: "Products | RealHand",
+      description: "Explore RealHand products including O6 and L6 dexterous robotic hands.",
+      ogTitle: "Products | RealHand",
+      ogDescription: "Explore RealHand products including O6 and L6 dexterous robotic hands.",
+    },
+    about: {
+      title: "About RealHand",
+      description: "Learn about RealHand and our mission to bring human-like dexterity to robotics.",
+      ogTitle: "About RealHand",
+      ogDescription: "Learn about RealHand and our mission to bring human-like dexterity to robotics.",
+    },
+    blog: {
+      title: "Blog | RealHand",
+      description: "Read updates and insights from the RealHand team.",
+      ogTitle: "Blog | RealHand",
+      ogDescription: "Read updates and insights from the RealHand team.",
+    },
+    sponsorship: {
+      title: "Sponsorship | RealHand",
+      description: "Partner with RealHand to support the future of dexterous robotics.",
+      ogTitle: "Sponsorship | RealHand",
+      ogDescription: "Partner with RealHand to support the future of dexterous robotics.",
+    },
+    contact: {
+      title: "Contact | RealHand",
+      description: "Get in touch with RealHand.",
+      ogTitle: "Contact | RealHand",
+      ogDescription: "Get in touch with RealHand.",
+    },
+  },
 };
 
 const runtime =
@@ -86,5 +143,9 @@ export const siteConfig: SiteConfig = {
   seo: {
     ...defaultConfig.seo,
     ...(runtime?.seo ?? {}),
+  },
+  seoSections: {
+    ...defaultConfig.seoSections,
+    ...(runtime?.seoSections ?? {}),
   },
 };

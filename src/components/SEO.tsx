@@ -1,12 +1,20 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { siteConfig } from "@/config/site";
 
 const SEO = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    const { seo } = siteConfig;
+    const { seo, seoSections } = siteConfig;
+    const hashKey = location.hash.replace("#", "").trim();
+    const sectionOverrides = (hashKey && seoSections ? seoSections[hashKey] : undefined) ?? {};
+    const mergedSeo = { ...seo, ...sectionOverrides };
+    const baseCanonical = mergedSeo.canonicalUrl || seo.canonicalUrl;
+    const canonicalUrl = hashKey ? `${baseCanonical.replace(/\/$/, "")}/#${hashKey}` : baseCanonical;
 
     // Update document title
-    document.title = seo.title;
+    document.title = mergedSeo.title;
 
     // Helper function to update or create meta tags by name
     const updateMetaByName = (name: string, content: string) => {
@@ -31,9 +39,9 @@ const SEO = () => {
     };
 
     // Update basic meta tags
-    updateMetaByName("description", seo.description);
-    updateMetaByName("keywords", seo.keywords);
-    updateMetaByName("author", seo.author);
+    updateMetaByName("description", mergedSeo.description);
+    updateMetaByName("keywords", mergedSeo.keywords);
+    updateMetaByName("author", mergedSeo.author);
 
     // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
@@ -42,18 +50,21 @@ const SEO = () => {
       canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute("href", seo.canonicalUrl);
+    canonical.setAttribute("href", canonicalUrl);
 
     // Update Open Graph tags
-    updateMetaByProperty("og:title", seo.ogTitle);
-    updateMetaByProperty("og:description", seo.ogDescription);
-    updateMetaByProperty("og:image", seo.ogImage);
-    updateMetaByProperty("og:type", seo.ogType);
+    updateMetaByProperty("og:title", mergedSeo.ogTitle);
+    updateMetaByProperty("og:description", mergedSeo.ogDescription);
+    updateMetaByProperty("og:image", mergedSeo.ogImage);
+    updateMetaByProperty("og:type", mergedSeo.ogType);
+    updateMetaByProperty("og:url", canonicalUrl);
 
     // Update Twitter tags
-    updateMetaByName("twitter:card", seo.twitterCard);
-    updateMetaByName("twitter:site", seo.twitterSite);
-    updateMetaByName("twitter:image", seo.twitterImage);
+    updateMetaByName("twitter:card", mergedSeo.twitterCard);
+    updateMetaByName("twitter:site", mergedSeo.twitterSite);
+    updateMetaByName("twitter:image", mergedSeo.twitterImage);
+    updateMetaByName("twitter:title", mergedSeo.ogTitle);
+    updateMetaByName("twitter:description", mergedSeo.ogDescription);
 
     // Update schema.org JSON-LD
     let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
@@ -62,8 +73,8 @@ const SEO = () => {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: siteConfig.brand.companyName,
-        url: seo.canonicalUrl,
-        description: seo.description,
+        url: canonicalUrl,
+        description: mergedSeo.description,
         sameAs: [
           siteConfig.brand.social.youtubeUrl,
           siteConfig.brand.social.instagramUrl,
@@ -72,7 +83,7 @@ const SEO = () => {
       };
       scriptTag.textContent = JSON.stringify(schema, null, 2);
     }
-  }, []);
+  }, [location.hash]);
 
   return null; // This component doesn't render anything
 };
