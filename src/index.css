@@ -103,6 +103,14 @@
     background: var(--gradient-bg);
   }
 
+  html.scroll-locked body {
+    padding-right: var(--scrollbar-width);
+  }
+
+  html.scroll-locked .scroll-lock-pad {
+    padding-right: var(--scrollbar-width);
+  }
+
   h1,
   h2,
   h3,

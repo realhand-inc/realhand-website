@@ -27,14 +27,12 @@ const Footer = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <section aria-label="Contact call to action" className="mb-20">
+        {/* <section aria-label="Contact call to action" className="mb-20">
           <div className="glass-card p-12 text-center max-w-4xl mx-auto shadow-soft">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Ready to build with intelligent hardware?
+              Ready to build with Dexterous Hand?
             </h2>
-            <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-              Talk to our team about deployments, integrations, and next-gen hardware + AI workflows.
-            </p>
+            
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <ContactDialog
                 trigger={
@@ -44,12 +42,10 @@ const Footer = () => {
                   </Button>
                 }
               />
-              <Button variant="glass" size="lg">
-                Request Demo
-              </Button>
+              
             </div>
           </div>
-        </section>
+        </section> */}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           <div className="lg:col-span-2">

@@ -1,6 +1,7 @@
 import SponsorshipForm from "@/components/SponsorshipForm";
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import { lockBodyScroll, unlockBodyScroll } from "@/lib/scroll-lock";
 
 const Sponsorship = () => {
   const [showVideoModal, setShowVideoModal] = useState(false);
@@ -26,12 +27,12 @@ const Sponsorship = () => {
 
   useEffect(() => {
     if (showVideoModal || showFormModal) {
-      document.body.style.overflow = 'hidden';
+      lockBodyScroll();
     } else {
-      document.body.style.overflow = 'unset';
+      unlockBodyScroll();
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      unlockBodyScroll();
     };
   }, [showVideoModal, showFormModal]);
 

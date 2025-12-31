@@ -20,7 +20,7 @@ const NotFound = () => {
           <p>Current Path: {location.pathname}</p>
           <p>Base URL: {import.meta.env.BASE_URL}</p>
         </div>
-        <a href="/handcrafted-ai-futures/" className="text-primary underline hover:text-primary/90">
+        <a href="/" className="text-primary underline hover:text-primary/90">
           Return to Home
         </a>
       </div>

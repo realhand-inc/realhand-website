@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { lockBodyScroll, unlockBodyScroll } from "@/lib/scroll-lock";
 
 interface DemoSectionProps {
   isOpen: boolean;
@@ -21,14 +22,14 @@ const DemoSection = ({ isOpen, onClose }: DemoSectionProps) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      lockBodyScroll();
       // Load iframe when modal opens
       setShouldLoadIframe(true);
     } else {
-      document.body.style.overflow = 'unset';
+      unlockBodyScroll();
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      unlockBodyScroll();
     };
   }, [isOpen]);
 

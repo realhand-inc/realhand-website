@@ -6,14 +6,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
+import { lockBodyScroll, unlockBodyScroll } from "@/lib/scroll-lock";
 
 type ContactDialogProps = {
   trigger: React.ReactNode;
 };
 
 const ContactDialog = ({ trigger }: ContactDialogProps) => {
+  const handleOpenChange = (open: boolean) => {
+    if (open) {
+      lockBodyScroll();
+    } else {
+      unlockBodyScroll();
+    }
+  };
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-5xl w-[95vw] p-0">
         <div className="relative overflow-hidden">

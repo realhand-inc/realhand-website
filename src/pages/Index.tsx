@@ -6,6 +6,7 @@ import BlogSection from "@/components/BlogSection";
 import DemoSection from "@/components/DemoSection";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -45,19 +46,22 @@ const Index = () => {
   );
 
   return (
-    <main className="min-h-screen bg-background">
-      <Navbar />
-      <Hero onShowDemo={handleShowDemo} />
-      <DemoSection isOpen={showDemo} onClose={() => setShowDemo(false)} />
-      <SectionDivider />
-      <Products />
-      <SectionDivider />
-      <Sponsorship />
-      <SectionDivider />
-      <BlogSection />
-      <About />
-      <Footer />
-    </main>
+    <>
+      <SEO />
+      <main className="min-h-screen bg-background">
+        <Navbar />
+        <Hero onShowDemo={handleShowDemo} />
+        <DemoSection isOpen={showDemo} onClose={() => setShowDemo(false)} />
+        <SectionDivider />
+        <Products />
+        <SectionDivider />
+        <Sponsorship />
+        <SectionDivider />
+        <BlogSection />
+        <About />
+        <Footer />
+      </main>
+    </>
   );
 };
 

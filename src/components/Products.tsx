@@ -23,6 +23,23 @@ const products = [
   },
 ];
 
+const newProducts = [
+  {
+    id: "x1",
+    name: "Realhand X1",
+    description:
+      "Next-generation dexterous platform with advanced tactile sensing and adaptive grasping for research and industrial pilots.",
+    imageUrl: "",
+  },
+  {
+    id: "s2",
+    name: "Realhand S2",
+    description:
+      "Slim, lightweight hand optimized for wearable teleoperation and human-robot collaboration applications.",
+    imageUrl: "",
+  },
+];
+
 const L6Details = () => (
   <div className="bg-card/80 text-foreground">
     <div className="px-6 py-10 md:px-10">
@@ -285,10 +302,10 @@ const Products = () => {
             Products
           </span>
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
-            Our Product Line
+            Available Products
           </h2>
           <p className="text-muted-foreground text-lg">
-            Advanced AI-powered hardware solutions designed for precision, performance, and scalability.
+           
           </p>
         </div>
 
@@ -361,6 +378,58 @@ const Products = () => {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-16 text-center max-w-3xl mx-auto">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+            Coming Soon
+          </span>
+          <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+            Upcoming Products
+          </h3>
+          <p className="text-muted-foreground text-lg">
+            Stay tuned for the next wave of Realhand platforms.
+          </p>
+        </div>
+
+        <div className="mt-10 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {newProducts.map((product) => (
+            <div key={product.id} id={product.id} className="glass-card p-6 scroll-mt-24">
+              <div className="glass-card p-1 mb-6">
+                <div className="relative aspect-square rounded-2xl overflow-hidden bg-muted/30">
+                  {product.imageUrl ? (
+                    <img
+                      src={product.imageUrl}
+                      alt={`${product.name} hardware product`}
+                      className="absolute inset-0 h-full w-full object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+                          <Box className="h-8 w-8 text-primary" />
+                        </div>
+                        <p className="text-muted-foreground text-sm">
+                          Coming soon
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="text-center">
+                <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                  {product.name}
+                </h3>
+                <p className="text-left text-muted-foreground text-lg leading-relaxed mb-6">
+                  {product.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

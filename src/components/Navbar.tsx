@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`scroll-lock-pad fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/85 backdrop-blur-xl border-b border-border/60 shadow-lg"
           : "bg-background/60 backdrop-blur-md shadow-md"
