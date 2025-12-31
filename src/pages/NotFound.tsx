@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 const NotFound = () => {
   const location = useLocation();
+  const homeUrl = import.meta.env.PROD ? "/realhand-website/" : "/";
 
   useEffect(() => {
     console.error(
@@ -20,7 +21,7 @@ const NotFound = () => {
           <p>Current Path: {location.pathname}</p>
           <p>Base URL: {import.meta.env.BASE_URL}</p>
         </div>
-        <a href="/realhand-website/" className="text-primary underline hover:text-primary/90">
+        <a href={homeUrl} className="text-primary underline hover:text-primary/90">
           Return to Home
         </a>
       </div>

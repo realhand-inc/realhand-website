@@ -25,18 +25,18 @@ const products = [
 
 const newProducts = [
   {
-    id: "x1",
-    name: "Realhand X1",
+    id: "l20",
+    name: "Realhand L20",
     description:
-      "Next-generation dexterous platform with advanced tactile sensing and adaptive grasping for research and industrial pilots.",
-    imageUrl: "",
+      "Compact, power-efficient platform designed for scalable deployments and embedded automation.",
+    imageUrl: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/9254a520-10e9-4c6d-b6a0-90df548578b5/Photoroom_20250930_205853.JPG?format=2500w",
   },
   {
-    id: "s2",
-    name: "Realhand S2",
+    id: "l30",
+    name: "Realhand L30",
     description:
-      "Slim, lightweight hand optimized for wearable teleoperation and human-robot collaboration applications.",
-    imageUrl: "",
+      "Higher-performance dexterous hardware built for demanding manipulation tasks and advanced control.",
+    imageUrl: "https://images.squarespace-cdn.com/content/v1/68d1d70b0893e90df94a3d16/7304e205-68b7-4377-b038-60f1c33c8526/Photoroom_20250930_210107.JPG?format=2500w",
   },
 ];
 
@@ -388,7 +388,7 @@ const Products = () => {
             Upcoming Products
           </h3>
           <p className="text-muted-foreground text-lg">
-            Stay tuned for the next wave of Realhand platforms.
+            Stay tuned for the next generation.
           </p>
         </div>
 

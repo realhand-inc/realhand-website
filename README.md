@@ -66,9 +66,17 @@ npm run preview
 
 The site is configured for GitHub Pages deployment at `/realhand-website/`.
 
-Build settings:
+### Development
+- Access at: `http://localhost:8080/`
+- Base path: `/` (root)
+- Router basename: Not set
+
+### Production
+- Deployed at: `https://yourusername.github.io/realhand-website/`
 - Base path: `/realhand-website/`
 - Router basename: `/realhand-website`
+
+The configuration automatically switches between development and production modes.
 
 ## Features
 

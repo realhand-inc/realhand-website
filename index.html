@@ -49,6 +49,18 @@
 
     <!-- Runtime site configuration -->
     <script src="/site-config.js"></script>
+
+    <!-- GitHub Pages SPA redirect handler -->
+    <script>
+      // This script checks for a redirect from 404.html and restores the correct URL
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
 
   <body>
