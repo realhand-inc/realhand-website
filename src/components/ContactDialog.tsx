@@ -78,30 +78,7 @@ const ContactDialog = ({ trigger }: ContactDialogProps) => {
                 className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/55 to-black/20 pointer-events-none"
                 aria-hidden="true"
               />
-              <div className="relative z-10 flex h-full flex-col justify-between gap-10 p-8 text-white md:p-10">
-                <div className="grid gap-4">
-                  <div className="inline-flex w-fit rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em]">
-                    Contact RealHand
-                  </div>
-                  <h2 className="text-3xl font-display font-semibold md:text-4xl">Let&apos;s build your next hand</h2>
-                  <p className="text-sm text-white/80 md:text-base">
-                    Tell us about your project, timeline, and any technical requirements. We respond within two business
-                    days.
-                  </p>
-                </div>
-
-                <img
-                  src="https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/1abc0009-2397-4b84-a2ce-b88b27b05d9d/CES_2026.png?content-type=image%2Fpng"
-                  alt="CES 2026 announcement"
-                  className="w-full rounded-xl bg-white/5 p-2"
-                  loading="lazy"
-                  decoding="async"
-                />
-
-                <div className="rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-sm font-medium tracking-[0.04em]">
-                  325 Forest Ave, Palo Alto, CA
-                </div>
-              </div>
+              <div className="relative z-10 h-full" aria-hidden="true" />
             </div>
 
             <div className="relative z-10 grid gap-8 p-8 md:p-10">
@@ -110,6 +87,7 @@ const ContactDialog = ({ trigger }: ContactDialogProps) => {
                 <p className="text-sm text-muted-foreground">
                   Share the basics and our team will reach out with next steps.
                 </p>
+                <p className="text-sm font-medium tracking-[0.04em] text-foreground">325 Forest Ave, Palo Alto, CA</p>
               </div>
 
               <form className="grid gap-5" onSubmit={handleSubmit}>
