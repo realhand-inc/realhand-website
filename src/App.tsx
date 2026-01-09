@@ -4,6 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
+import { useEffect } from "react";
+import { initGA } from "@/lib/analytics";
+import { usePageTracking } from "@/hooks/use-analytics";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -12,6 +15,16 @@ const queryClient = new QueryClient();
 const baseUrl = import.meta.env.BASE_URL || "/";
 const basename = baseUrl === "/" ? "" : baseUrl.replace(/\/$/, "");
 
+// Component to initialize GA and track page views
+const AnalyticsWrapper = () => {
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  usePageTracking();
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -19,6 +32,7 @@ const App = () => (
       <Sonner />
       <Analytics />
       <BrowserRouter basename={basename}>
+        <AnalyticsWrapper />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/o6" element={<Index forcedSection="o6" />} />
