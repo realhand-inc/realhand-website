@@ -102,10 +102,15 @@ const Footer = () => {
               >
                 
               </a>
-              <div className="flex items-center gap-3 text-muted-foreground">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=325+Forest+Ave,+Palo+Alto,+CA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+              >
                 <MapPin className="w-4 h-4" />
                 <span>325 Forest Ave, Palo Alto, CA</span>
-              </div>
+              </a>
             </div>
           </div>
 

@@ -27,7 +27,15 @@ const sectionRoutes: Record<SectionKey, string> = {
 const Index = ({ forcedSection = null }: IndexProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isAnnouncementVisible, setIsAnnouncementVisible] = useState(true);
+
+  // Check if current date is after February 5, 2026
+  const isAnnouncementActive = () => {
+    const currentDate = new Date();
+    const expiryDate = new Date('2026-02-05T23:59:59');
+    return currentDate <= expiryDate;
+  };
+
+  const [isAnnouncementVisible, setIsAnnouncementVisible] = useState(isAnnouncementActive());
   const [isAnnouncementExpanded, setIsAnnouncementExpanded] = useState(false);
   const [isAnnouncementDismissed, setIsAnnouncementDismissed] = useState(false);
 
@@ -124,7 +132,7 @@ const Index = ({ forcedSection = null }: IndexProps) => {
         <BlogSection />
         <About />
         <Footer />
-        {isAnnouncementVisible && !isAnnouncementExpanded && (
+        {isAnnouncementActive() && isAnnouncementVisible && !isAnnouncementExpanded && (
           <div
             className="fixed bottom-6 right-6 z-40 max-w-[320px] rounded-lg border border-border/60 bg-background/95 p-3 shadow-lg backdrop-blur"
             role="status"
@@ -153,8 +161,8 @@ const Index = ({ forcedSection = null }: IndexProps) => {
               aria-label="Open announcement details"
             >
               <img
-                src="https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/1abc0009-2397-4b84-a2ce-b88b27b05d9d/CES_2026.png?content-type=image%2Fpng"
-                alt="CES 2026 announcement"
+                src="/images/ExhibitionPost-2.jpg"
+                alt="MD&M West 2026 announcement - February 3-5, Anaheim Convention Center"
                 className="h-auto w-full rounded-md"
                 loading="lazy"
                 decoding="async"
@@ -162,7 +170,7 @@ const Index = ({ forcedSection = null }: IndexProps) => {
             </button>
           </div>
         )}
-        {isAnnouncementExpanded && (
+        {isAnnouncementActive() && isAnnouncementExpanded && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6"
             role="dialog"
@@ -183,8 +191,8 @@ const Index = ({ forcedSection = null }: IndexProps) => {
                 <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
               <img
-                src="https://images.squarespace-cdn.com/content/68d1d70b0893e90df94a3d16/1abc0009-2397-4b84-a2ce-b88b27b05d9d/CES_2026.png?content-type=image%2Fpng"
-                alt="CES 2026 announcement"
+                src="/images/ExhibitionPost-2.jpg"
+                alt="MD&M West 2026 announcement - February 3-5, Anaheim Convention Center"
                 className="w-full max-h-[calc(90vh-6rem)] sm:max-h-[calc(90vh-8rem)] object-contain rounded-lg"
                 loading="lazy"
                 decoding="async"
