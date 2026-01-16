@@ -80,7 +80,7 @@ const Sponsorship = () => {
                 className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-expanded={showFormModal}
               >
-                Fill the form
+                Apply
               </button>
             </div>
           </div>
